@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Member Login</h2>
+{% include 'registration/login_form.html' %}
+<p>If you do not have an account, please <a href="/accounts/register/">click here</a>.</p>
+<p>If you do not remember your password, please <a href="/accounts/password/reset/">click here</a> to have it reset.</p>
+
+{% endblock %}

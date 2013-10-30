@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} Time Clock {% endblock %}</title>
+        <!-- Latest compiled and minified CSS -->
+        <!-- see http://netdna.bootstrapcdn.com/#bootswatch for some other "flavors" to try -->
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+        
+		<!-- Latest compiled and minified JavaScript -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+		
+		<style type="text/css">
+			h2{padding: 20px 0 10px 0;}
+		</style>	
+	
+        {% block extrascripts %}{% endblock %}
+    </head>
+    <body>
+		<div class="container">
+			<h1 class="text-center">Time Clock</h1>
+			<div class="nav navbar-nav">
+				<a href="/" class="btn btn-primary">My Punches</a>
+				{% if status == False %}
+					<a href="{% url 'clock:clock-in' %}" class="btn btn-success">Clock In</a>
+				{% endif %}
+			</div>
+			<div class="nav navbar-nav navbar-right">
+				{% if not user.is_authenticated %}
+					<a href="{% url 'auth_login' %}" class="btn btn-primary">Login</a>
+					<a href="{% url 'registration_register' %}" class="btn btn-primary">Register</a>
+				{% else %}
+					{% if user.is_staff %}
+						<a href="/admin/" class="btn btn-primary">Admin</a>
+						<a href="" class="btn btn-primary">Reports</a>
+					{% endif %}
+					<a href="{% url 'auth_logout' %}" class="btn btn-primary">Logout</a>
+				{% endif %}
+			</div>
+			<hr />
+			<hr style="position: relative; top: -7px;"/>
+			{% block content %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

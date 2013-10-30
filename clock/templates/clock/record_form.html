@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load tz %}
+
+{% block extrascripts %}
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<link rel="stylesheet"  type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-darkness/jquery-ui.min.css">
+<script src="/media/timepicker.js"></script>
+
+<script>
+$(function() {
+    $('#id_startTime').datetimepicker();
+    $('#id_endTime').datetimepicker();
+});
+</script>
+{% endblock %}
+
+{% block title %}Update Record{% endblock %}
+
+{% block content %}
+
+<h2>Update Time Clock Record</h2>
+
+<form action="." method="post">
+{% csrf_token %}
+<table class="table">
+{{ form }}
+</table>
+<button class="btn btn-primary">Update</button>
+</form>
+
+{% endblock %}
+

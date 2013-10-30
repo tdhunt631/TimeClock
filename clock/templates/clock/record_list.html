@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Time Clock{% endblock %} 
+
+{% block extrascripts %}
+{% endblock %}
+
+{% block content %}
+	{% if messages %}
+		<div class="alert alert-success">
+    		{% for message in messages %}
+    			{{ message }}
+    		{% endfor %}
+		</div>
+	{% endif %}
+	<h2>Recent Punches for {{ user.username }}</h2>
+	<table class="table table-striped">
+		<tr>
+			<th>Project</th>
+			<th>Start Time</th>
+			<th>End Time</th>
+			<th>Notes</th>
+			<th></th>
+		</tr>
+		{% for record in records %}
+			<tr>
+				<td>{{ record.project }}</td>
+				<td>{{ record.startTime }}</td>
+				<td>{{ record.endTime }}</td>
+				<td>{{ record.note }}</td>
+				{% if status == True and record.endTime == None %}
+					<td><a href="{% url 'clock:clock-out' record.id %}" class="btn btn-xs btn-danger">Clock Out</a></td>
+				{% else %}
+					<td><a href="{% url 'clock:record-update' record.id %}" class="btn btn-primary btn-xs">Edit</a></td>
+				{% endif %}
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}
+

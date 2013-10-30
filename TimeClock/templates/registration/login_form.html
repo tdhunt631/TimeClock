@@ -1,0 +1,18 @@
+{% if form.non_field_errors %}
+{{ form.non_field_errors }}
+{% endif %}
+<form method="post" action="/accounts/login/">{% csrf_token %}
+<table>
+{% if form.username.errors %}
+<tr><td colspan="2">{% for e in form.username.errors %}{{ e }}{% endfor %}</td></tr>
+{% endif %}
+<tr><td><label for="id_username">Username:</label></td><td>{{ form.username }}</td></tr>
+{% if form.password.errors %}
+<tr><td colspan="2">{% for e in form.password.errors %}{{ e }}{% endfor %}</td></tr>
+{% endif %}
+<tr><td><label for="id_password">Password:</label></td><td>{{ form.password }}</td></tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
