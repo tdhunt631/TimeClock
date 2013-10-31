@@ -11,12 +11,12 @@ from clock.forms import AddRecordForm, UpdateRecordForm, DateRangeForm, AddNoteF
 from django.utils import timezone
 from django.views.generic.edit import BaseCreateView
 
-# Easier way to decorate a class!  Just use @class_view_decorator
+#adds ability to decorate a class 
 def class_view_decorator(decorator):
-	def simple_decorator(View):
+	def my_decorator(View):
 		View.dispatch = method_decorator(decorator)(View.dispatch)
 		return View
-	return simple_decorator
+	return my_decorator
 
 
 @class_view_decorator(login_required)
